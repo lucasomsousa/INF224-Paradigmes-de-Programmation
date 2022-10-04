@@ -1,0 +1,8 @@
+<map id="cppu::TCPServer::CallbackMethod&lt; T &gt;" name="cppu::TCPServer::CallbackMethod&lt; T &gt;">
+<area shape="rect" id="node1" title=" " alt="" coords="65,260,256,301"/>
+<area shape="rect" id="node2" href="$structcppu_1_1TCPServer_1_1Callback.html" title="Callback interface." alt="" coords="5,171,196,197"/>
+<area shape="rect" id="node3" href="$classcppu_1_1TCPConnection.html" title="Connection with a given client. Each TCPConnection uses a different thread." alt="" coords="220,171,379,197"/>
+<area shape="rect" id="node4" href="$classcppu_1_1SocketBuffer.html" title="Preserves record boundaries when exchanging data between connected TCP/IP sockets...." alt="" coords="228,95,371,121"/>
+<area shape="rect" id="node5" href="$classcppu_1_1Socket.html" title="TCP/IP or UDP/Datagram socket. This class encapsulates a TCP/IP or UDP/Datagram socket...." alt="" coords="177,5,281,32"/>
+<area shape="rect" id="node6" href="$structcppu_1_1InputBuffer.html" title=" " alt="" coords="305,5,438,32"/>
+</map>

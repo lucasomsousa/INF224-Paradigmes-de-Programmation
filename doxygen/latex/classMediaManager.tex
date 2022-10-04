@@ -1,0 +1,47 @@
+\hypertarget{classMediaManager}{}\doxysection{Media\+Manager Class Reference}
+\label{classMediaManager}\index{MediaManager@{MediaManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMediaManager_a02e63767e06f947cbb3690288f65c59e}\label{classMediaManager_a02e63767e06f947cbb3690288f65c59e}} 
+Multimedia\+Ptr {\bfseries create\+Photo} (string \+\_\+name, string \+\_\+path, double \+\_\+latitude, double \+\_\+longitude)
+\item 
+\mbox{\Hypertarget{classMediaManager_a73f25ea0826d9a4e77ac7b79ad9505f0}\label{classMediaManager_a73f25ea0826d9a4e77ac7b79ad9505f0}} 
+Multimedia\+Ptr {\bfseries create\+Video} (string \+\_\+name, string \+\_\+path, int \+\_\+duration)
+\item 
+\mbox{\Hypertarget{classMediaManager_aede01f574b1574bea9dd59b09c3c8d9e}\label{classMediaManager_aede01f574b1574bea9dd59b09c3c8d9e}} 
+Multimedia\+Ptr {\bfseries create\+Film} (string \+\_\+name, string \+\_\+path, int \+\_\+duration, int $\ast$\+\_\+chapters\+Lengths, unsigned int \+\_\+num\+Chapters)
+\item 
+\mbox{\Hypertarget{classMediaManager_a92c3270914b8bcd118afbe303d2fb8f2}\label{classMediaManager_a92c3270914b8bcd118afbe303d2fb8f2}} 
+Group\+Ptr {\bfseries create\+Group} (string \+\_\+name)
+\item 
+\mbox{\Hypertarget{classMediaManager_aa802798c96481593e7b5a79ddf4b1620}\label{classMediaManager_aa802798c96481593e7b5a79ddf4b1620}} 
+Multimedia\+Ptr {\bfseries search\+Media} (string \+\_\+name)
+\item 
+\mbox{\Hypertarget{classMediaManager_a51a33941c9a145bd53de47f1e655a01e}\label{classMediaManager_a51a33941c9a145bd53de47f1e655a01e}} 
+Group\+Ptr {\bfseries search\+Group} (string \+\_\+name)
+\item 
+\mbox{\Hypertarget{classMediaManager_ade0e91144cb677d5a92bebf891c975e2}\label{classMediaManager_ade0e91144cb677d5a92bebf891c975e2}} 
+void {\bfseries show\+Media} (string \+\_\+name, ostream \&stream)
+\item 
+\mbox{\Hypertarget{classMediaManager_aeb8a171112264991ca2f9681cd489505}\label{classMediaManager_aeb8a171112264991ca2f9681cd489505}} 
+void {\bfseries show\+Group} (string \+\_\+name, ostream \&stream)
+\item 
+\mbox{\Hypertarget{classMediaManager_aceec459a79793af61c38a8e4d38c5b29}\label{classMediaManager_aceec459a79793af61c38a8e4d38c5b29}} 
+void {\bfseries play\+Media} (string \+\_\+name, ostream \&stream)
+\item 
+\mbox{\Hypertarget{classMediaManager_ab03c3d1dfc48a2db48250d281d1da694}\label{classMediaManager_ab03c3d1dfc48a2db48250d281d1da694}} 
+void {\bfseries delete\+Media} (string \+\_\+name, ostream \&stream)
+\item 
+\mbox{\Hypertarget{classMediaManager_ab83798aa765df4914b69b8c323d2e86c}\label{classMediaManager_ab83798aa765df4914b69b8c323d2e86c}} 
+void {\bfseries delete\+Group} (string \+\_\+name, ostream \&stream)
+\item 
+\mbox{\Hypertarget{classMediaManager_a55b26f3f9b36fa4cb430995c69e87f8d}\label{classMediaManager_a55b26f3f9b36fa4cb430995c69e87f8d}} 
+bool {\bfseries process\+Request} (\mbox{\hyperlink{classcppu_1_1TCPConnection}{T\+C\+P\+Connection}} \&cnx, const string \&request, string \&response)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp/mediamanager.\+h\item 
+cpp/mediamanager.\+cpp\end{DoxyCompactItemize}

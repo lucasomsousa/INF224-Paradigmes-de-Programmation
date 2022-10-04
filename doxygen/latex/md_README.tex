@@ -1,0 +1,137 @@
+This is a project for the course \char`\"{}\+I\+N\+F224 -\/ Paradigmes de Programmation\char`\"{} at Télécom Paris. It consists of two parts\+: a C++ one, where classes are defined to handle different types of media (such as images and videos), and a Java Swing part where the G\+UI is implemented. Below, you can find comments about each step of development, with the steps being followed as proposed in the course website (\href{https://perso.telecom-paristech.fr/elc/cpp/TP-C++.html}{\texttt{ https\+://perso.\+telecom-\/paristech.\+fr/elc/cpp/\+T\+P-\/\+C++.\+html}}). The TP was fully done in my machine running Ubuntu 20.\+04, but it was tested in a school machine afterwards and it functioned normally.
+
+\doxysection*{C++}
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Steps 1 to 3}}\+:
+\end{DoxyItemize}
+
+No necessary comments about these steps. The makefile was correctly updated with new sources, functions that don\textquotesingle{}t change instance variables were declared with keyword {\itshape const}.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 4}}\+:
+\end{DoxyItemize}
+
+\begin{quote}
+Comme pour la fonction d\textquotesingle{}affichage, la fonction pour jouer l\textquotesingle{}objet ne modifie pas l\textquotesingle{}objet et elle doit être déclarée dans les classes {\bfseries{\mbox{\hyperlink{classPhoto}{Photo}}}} et {\bfseries{\mbox{\hyperlink{classVideo}{Video}}}} et dans la {\bfseries{classe de base}} afin de permettre un appel polymorphique sur la hiérarchie de classes. Cependant, contrairement à la fonction d\textquotesingle{}affichage, elle ne peut pas avoir d\textquotesingle{}implementation au niveau de la classe de base (car a priori chaque type d\textquotesingle{}objet nécessite un utilitaire différent pour être joué). Comment appelle-\/t\textquotesingle{}on ce type de méthode et comment faut-\/il les déclarer ? \end{quote}
+
+
+This kind of method is called {\itshape abstract method}, a method without an implementation. This kind of method shows us a concept specification for which the realization will be different for different subclasses. To declare the abstract method we add the keyword {\itshape virtual} in the beginning of the declaration and we assign 0 to it. To actually use such a method, we have to redefine and implement it in a subclass.
+
+\begin{quote}
+Modifier le {\itshape Makefile} si nécessaire (on rappelle qu\textquotesingle{}il ne faut pas mettre les .h dans {\itshape S\+O\+U\+R\+C\+ES}). Compiler, corriger les éventuelles erreurs et tester le programme. Si vous avez fait correctement ce qui précède, il ne sera plus possible d\textquotesingle{}instancer des objets de la classe de base. Pourquoi ? \end{quote}
+
+
+The methods don\textquotesingle{}t have an implementation anymore (since they\textquotesingle{}re now abstract methods).
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 5}}
+\end{DoxyItemize}
+
+\begin{quote}
+On veut maintenant pouvoir traiter génériquement une liste comprenant à la fois des photos et des vidéos. Pour ce faire créer dans {\itshape main.\+cpp} un tableau dont les éléments sont tantôt une photo tantôt une vidéo. Ecrire ensuite une boucle permettant d\textquotesingle{}afficher les attributs de tous les élements du tableau (ou de les \char`\"{}jouer\char`\"{}). Cette boucle n\textquotesingle{}a {\bfseries{pas besoin de connaître le type}} des élements \+: elle doit pouvoir traiter de la même manière tous les objets dérivant de la classe de base. Quelle est la propriété caractéristique de l\textquotesingle{}{\bfseries{orienté objet}} qui permet de faire cela ? \end{quote}
+
+
+This characteristic is called inheritance polymorphism, in which an object can be seen in different ways (a square can be seen as a square, a rectangle, a polygon, etc).
+
+\begin{quote}
+Qu\textquotesingle{}est-\/il spécifiquement {\bfseries{nécessaire de faire dans le cas du C++}} ? \end{quote}
+
+
+If a method is redefined, we have to change it to {\itshape virtual} in the base class.
+
+\begin{quote}
+Quel est le type des éléments du tableau \+: est-\/ce que ce tableau contient les objets ou des {\bfseries{pointeurs}} vers ces objets ? Pourquoi ? Comparer à Java. \end{quote}
+
+
+The table contains pointers to the objects. The difference between Java and C++ in this case is that Java always calls the method of the {\itshape pointed}, while in C++ it depends if we use a dynamic linking (method of the {\itshape pointed}) or static linking (method of the {\itshape pointer}).
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 6}}
+\end{DoxyItemize}
+
+\begin{quote}
+Que faut-\/il faire pour que l\textquotesingle{}objet \mbox{\hyperlink{classFilm}{Film}} ait {\bfseries{plein contrôle sur ses données}} et que son tableau de durées des chapitres ne puisse pas être modifié (ou pire, détruit) à son insu ? (c\textquotesingle{}est l\textquotesingle{}objet qui doit pouvoir modifier ce qui lui appartient, pas les autres !) \end{quote}
+
+
+We need to create a deep-\/copy of the object and let \mbox{\hyperlink{classFilm}{Film}} handle this copy.
+
+\begin{quote}
+{\bfseries{Attention}}, le même problème se pose si un accesseur {\bfseries{retourne directement ce tableau sans prendre les précautions nécessaires}} \+: la encore le contenu du tableau n\textquotesingle{}est pas récopié et l\textquotesingle{}appelant peut le modifier à sa guise. Quelle est la solution très simple que propose C/\+C++ pour éviter ce problème ? \end{quote}
+
+
+Adding a {\itshape const} to the method declaration is enough.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 7}}
+\end{DoxyItemize}
+
+\begin{quote}
+Contrairement à Java ou C\#, C/\+C++ ne gère pas la {\itshape mémoire dynamique} automatiquement ($\ast$) \+: comme il n\textquotesingle{}y a pas de ramasse miettes, tout ce qui a été créé avec {\itshape new} doit être détruit avec {\itshape delete} sinon on aura des fuites mémoires. Parmi les classes précédemment écrites quelles sont celles qu\textquotesingle{}il faut modifier afin qu\textquotesingle{}il n\textquotesingle{}y ait {\bfseries{pas de fuite mémoire}} quand on détruit leurs instances ? \end{quote}
+
+
+Only the \mbox{\hyperlink{classFilm}{Film}} class, since it\textquotesingle{}s the only one we used \char`\"{}new\char`\"{} to create an object.
+
+\begin{quote}
+De même, la {\bfseries{copie d\textquotesingle{}objets}} peut poser problème dans certains cas. Pourquoi et que faudrait-\/il faire ? \end{quote}
+
+
+If we use a shallow copy, the pointer of the copy and of the original object will point to the same object, so we\textquotesingle{}ll end up trying to destroy an object twice. Therefore, we must use deep copies.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 8}}
+\end{DoxyItemize}
+
+\begin{quote}
+Le groupe ne doit pas détruire les objets quand il est détruit car un objet peut appartenir à plusieurs groupes (on verra ce point à la question suivante). On rappelle aussi que la liste d\textquotesingle{}objets doit en fait être une liste de {\bfseries{pointeurs}} d\textquotesingle{}objets. Pourquoi ? Comparer à Java. \end{quote}
+
+
+With a list of pointers, we can use Polymorphism and treat different objects in a similar manner, as explained in {\bfseries{Step 5}}.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 9}}
+\end{DoxyItemize}
+
+Nothing to comment about this step. The code was updated in order to use smart pointers and I simplified the writing using {\itshape typedef}.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 10}}
+\end{DoxyItemize}
+
+\begin{quote}
+Les méthodes précédentes permettent d\textquotesingle{}assurer la {\bfseries{cohérence de la base de données}} car quand on crée un objet on l\textquotesingle{}ajoute à la table adéquate. Par contre, ce ne sera pas le cas si on crée un objet directement avec {\itshape new} (il n\textquotesingle{}appartiendra à aucune table). Comment peut-\/on l\textquotesingle{}interdire, afin que seule la classe servant à manipuler les objets puisse en créer de nouveaux ? \end{quote}
+
+
+We could use the keyword {\itshape protected} in the definition of the constructor of these classes.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Step 11}}
+\end{DoxyItemize}
+
+No specific comments about this step. Just to clarify about the \#ifdef V\+E\+R\+S\+I\+O\+N\+\_\+\+T\+R\+UC suggested, I didn\textquotesingle{}t include it since I did the versioning using a private repository on Git\+Hub, but the tests for each step are included as commented code in the {\itshape main.\+cpp} file.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Overview}}
+\end{DoxyItemize}
+
+Steps 1 to 11 were implemented following the suggestions in the TP page, without including many extras (but I did include some functions such as the ability to delete a media or a group).
+
+\doxysection*{Java Swing}
+
+There are no questions in the Java Swing part of the TP, so I\textquotesingle{}ll give a brief overview. The four steps were implemented. For the buttons, I\textquotesingle{}ve used the 3rd strategy seen in the course, with nested classes. For the second step, I\textquotesingle{}ve implemented the solution encouraged with the use of Action Listeners using subclasses of {\itshape Abstract\+Action}. As said before, I\textquotesingle{}ve implemented some extra functions in the C++ side (like deleting a media), but I chose to not implement it in the G\+UI since it\textquotesingle{}d take a little extra time.
+
+\doxysection*{Final considerations}
+
+The program was tested in a school machine and it performed as expected. For the upload. I\textquotesingle{}m not uploading the media used to test with the work (I believe it\textquotesingle{}s not quite clear if we should include some media for testing when submitting our work) and therefore I\textquotesingle{}ve commented the part of the code where some medias are created in the {\itshape main.\+cpp} file.
+
+The Doxygen documentation is accessible through the file {\itshape index.\+html} in the html folder. 
